@@ -1,0 +1,6 @@
+---
+- hosts: pica8_switches
+  gather_facts: false
+  name: Switch default configuration
+  roles:
+    - { role: default }

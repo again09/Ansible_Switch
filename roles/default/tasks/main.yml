@@ -1,0 +1,10 @@
+---
+# tasks file for Ansible_Switch
+#- name: Configure Pica8 switches
+#  hosts: pica8_switches
+#  tasks:
+- name: Transfer the script
+  copy: src=../files/default.conf dest=/home/admin/default.conf force=yes mode=0777
+
+- name: Activate the configuration
+  picos_config: mode='config_load' cmd='/home/admin/default.conf'
