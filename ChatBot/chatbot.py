@@ -1,13 +1,12 @@
 import os
+import Credential
+
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 from ansible_runner import run
 
-SLACK_APP_TOKEN = os.environ["SLACK_APP_TOKEN"]
-SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
-
-app = App(token=SLACK_BOT_TOKEN)
+app = App(token=Credential.SLACK_BOT_TOKEN)
 
 @app.event("app_mention")
 def handle_mention(event, say):
@@ -47,7 +46,7 @@ def handle_mention(event, say):
         message = message + "만약에 자동화 대상을 설정할 필요가 있다면 아래와 같은 양식을 사용하세요!\n\nex)\n@Automation Bot Switch Setup\n"
         say(message + "```" + content_ex + "```")
 
-handler = SocketModeHandler(app_token=SLACK_APP_TOKEN, app=app)
+handler = SocketModeHandler(app_token=Credential.SLACK_APP_TOKEN, app=app)
 
 if __name__ == "__main__":
     handler.start()
