@@ -12,7 +12,7 @@ app = App(token=Credential.SLACK_BOT_TOKEN)
 def handle_mention(event, say):
     user_id = event["user"]    
 
-    if "Switch Setup" in event["text"]:
+    if "Ansible_Switch" in event["text"]:
         inventory = "../inventory/inventory.ini"
         playbook = "../main.yml"
 
@@ -29,9 +29,9 @@ def handle_mention(event, say):
             inventory=inventory
         )
 
-        say(result.status)
+        say(f"Ansible_Switch " + result.status)
 
-    elif "대상" in event["text"]:
+    elif "Ansible_Switch_Destination" in event["text"]:
         with open("../inventory/inventory.ini", "r") as f:
             content = f.read()
         message = f"현재 자동화 대상은 아래와 같습니다.\n"
@@ -42,7 +42,7 @@ def handle_mention(event, say):
         with open("../inventory/inventory.ini.ex", "r") as f:
             content_ex = f.read()
         message = f"나를 멘션(@Automation Bot) 하고, Keyword를 입력해주세요.\n"
-        message = message + "현재 사용 가능 키워드: 대상(현재 자동화 대상), Switch Setup 2가지 입니다.\n"
+        message = message + "현재 사용 가능 키워드: Ansible_Switch_Destination(현재 자동화 대상), Ansible_Switch 2가지 입니다.\n"
         message = message + "만약에 자동화 대상을 설정할 필요가 있다면 아래와 같은 양식을 사용하세요!\n\nex)\n@Automation Bot Switch Setup\n"
         say(message + "```" + content_ex + "```")
 
